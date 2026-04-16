@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <defs>
+    <radialGradient id="glow" cx=".72" cy=".38" r=".65">
+      <stop offset="0" stop-color="#57ccff"/>
+      <stop offset=".45" stop-color="#19346b"/>
+      <stop offset="1" stop-color="#07091d"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="600" fill="#07091d"/>
+  <rect x="68" y="92" width="464" height="392" rx="52" fill="url(#glow)" stroke="#73c9ff" stroke-width="6"/>
+  <path d="M68 248h464M182 92v392M300 92v392M418 92v392" stroke="#bfe5ff" stroke-opacity=".18" stroke-width="3"/>
+  <path d="M100 130h400v314H100z" fill="#fff" opacity=".04"/>
+  <text x="300" y="285" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="132" fill="#fff">{JS}</text>
+  <text x="300" y="370" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="56" fill="#fff" opacity=".9">MASTERY</text>
+</svg>
