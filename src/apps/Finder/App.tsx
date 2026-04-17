@@ -1,6 +1,10 @@
 ﻿import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { FileText, Folder, Globe, Image, Search, Trash, X } from 'lucide-react'
+import { FileText, Folder, Search, Trash, X } from 'lucide-react'
+import safariIcon from '@/assets/safari_light.png'
+import imageFileIcon from '@/assets/finder_image_file.png'
+import defaultFileIcon from '@/assets/finder_default_file.png'
+import textFileIcon from '@/assets/finder_text_file.png'
 import { projects } from '../../data/projects'
 import { useWindowStore } from '../../store/useWindowStore'
 
@@ -19,11 +23,15 @@ interface PreviewState {
   image: string
 }
 
+function FinderFileIcon({ src, alt }: { src: string; alt: string }) {
+  return <img src={src} alt={alt} draggable={false} className="w-full h-full object-contain" />
+}
+
 const FILE_ICONS: Record<FileType, React.ReactNode> = {
-  app: <Globe size={28} className="text-blue-400" />,
-  txt: <FileText size={28} className="text-gray-300" />,
-  png: <Image size={28} className="text-blue-300" />,
-  fig: <FileText size={28} className="text-pink-300" />,
+  app: <FinderFileIcon src={safariIcon} alt="Safari link" />,
+  txt: <FinderFileIcon src={textFileIcon} alt="Text file" />,
+  png: <FinderFileIcon src={imageFileIcon} alt="Image file" />,
+  fig: <FinderFileIcon src={defaultFileIcon} alt="Default file" />,
 }
 
 function getFilesForProject(projectId: string): FileItem[] {
@@ -186,7 +194,7 @@ export function FinderApp() {
                     <FileText size={26} className="text-gray-500" />
                   </div>
                 ) : (
-                  <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/7 group-hover:shadow-[0_0_20px_rgba(96,165,250,0.25)] transition-shadow">
+                  <div className="w-14 h-14 flex items-center justify-center group-hover:drop-shadow-[0_0_14px_rgba(96,165,250,0.35)] transition-[filter]">
                     {file.icon}
                   </div>
                 )}
