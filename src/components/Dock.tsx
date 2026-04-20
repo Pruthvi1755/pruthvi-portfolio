@@ -1,5 +1,4 @@
-﻿import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+﻿﻿import { motion } from 'framer-motion'
 import { useWindowStore, type AppType } from '../store/useWindowStore'
 import { useThemeStore } from '../store/useThemeStore'
 import finderDark from '@/assets/finder_dark.png'
@@ -27,7 +26,6 @@ const DOCK_ITEMS: DockItem[] = [
   { id: 'finder', label: 'Finder', darkIcon: finderDark, lightIcon: finderLight },
   { id: 'safari', label: 'Safari', darkIcon: safariDark, lightIcon: safariLight },
   { id: 'gallery', label: 'Photos', darkIcon: photosDark, lightIcon: photosLight },
-  { id: 'resume', label: 'Resume', darkIcon: finderDark, lightIcon: finderLight },
   { id: 'contact', label: 'Contact', darkIcon: contactDark, lightIcon: contactLight },
   { id: 'terminal', label: 'Terminal', darkIcon: terminalDark, lightIcon: terminalLight },
   { id: 'trash', label: 'Trash', disabled: true, darkIcon: trashDark, lightIcon: trashLight },
@@ -36,7 +34,6 @@ const DOCK_ITEMS: DockItem[] = [
 function DockIcon({ item, isOpen }: { item: DockItem; isOpen: boolean }) {
   const { openWindow } = useWindowStore()
   const theme = useThemeStore(s => s.resolvedTheme)
-  const [hovered, setHovered] = useState(false)
 
   const handleClick = () => {
     if (item.disabled) return
@@ -45,24 +42,8 @@ function DockIcon({ item, isOpen }: { item: DockItem; isOpen: boolean }) {
 
   return (
     <div className="flex flex-col items-center relative">
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.9 }}
-            transition={{ duration: 0.14, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute left-1/2 bottom-[62px] -translate-x-1/2 bg-[#dce8ff] text-[#0f172a] text-[12px] leading-none px-3.5 py-1.5 rounded-md whitespace-nowrap pointer-events-none shadow-lg z-10"
-          >
-            {item.label}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       <motion.button
         onClick={handleClick}
-        onHoverStart={() => setHovered(true)}
-        onHoverEnd={() => setHovered(false)}
         whileHover={{ scale: 1.35, y: -8 }}
         whileTap={{ scale: 0.9, y: -2 }}
         transition={{ type: 'spring', stiffness: 520, damping: 24, mass: 0.55 }}

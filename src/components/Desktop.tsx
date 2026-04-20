@@ -40,7 +40,6 @@ function loadIconPositions(): DesktopIconPositions {
 
 function FolderIcon({
   icon,
-  selected,
   position,
   onSelect,
   onOpen,
@@ -125,16 +124,14 @@ function FolderIcon({
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerCancel}
       tabIndex={0}
-      className="absolute left-0 top-0 flex flex-col items-center gap-1 cursor-default w-[120px] focus:outline-none touch-none"
+      className="absolute left-0 top-0 flex flex-col items-center gap-1 cursor-grab active:cursor-grabbing w-[120px] focus:outline-none touch-none group"
       style={{ left: position.x, top: position.y }}
     >
       <div className="relative w-16 h-14">
         <img src={folderIcon} alt="" className="w-full h-full object-contain drop-shadow-lg" draggable={false} />
       </div>
       <span
-        className={`text-white text-[14px] text-center leading-tight px-2 py-1 rounded-md max-w-[120px] line-clamp-2 whitespace-pre-line ${
-          selected ? 'bg-blue-600/80' : ''
-        }`}
+        className="text-white text-[14px] text-center leading-tight px-2 py-1 rounded-md max-w-[120px] line-clamp-2 whitespace-pre-line transition-colors group-hover:bg-blue-600/80"
         style={{ textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}
       >
         {icon.label}
@@ -198,11 +195,31 @@ export function Desktop() {
         className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
         style={{ marginTop: '28px', paddingBottom: '80px' }}
       >
-        <p className={`${isDark ? 'text-white/58' : 'text-slate-900/55'} text-lg font-light mb-2`} style={{ textShadow: isDark ? '0 2px 8px rgba(0,0,0,0.4)' : '0 2px 12px rgba(255,255,255,0.55)' }}>
+        <motion.p 
+          className={`${isDark ? 'text-white/58' : 'text-slate-900/55'} text-lg font-light mb-2 pointer-events-auto cursor-default`}
+          initial={false}
+          whileHover={{
+            textShadow: isDark 
+              ? '-2px 0 0 rgba(0,255,255,0.8), 2px 0 0 rgba(255,0,0,0.8)' 
+              : '-1px 0 0 rgba(0,255,255,0.8), 1px 0 0 rgba(255,0,0,0.8)',
+            scale: 1.02,
+            transition: { duration: 0.2, ease: "easeOut" }
+          }}
+          style={{ textShadow: isDark ? '0 2px 8px rgba(0,0,0,0.4)' : '0 2px 12px rgba(255,255,255,0.55)' }}
+        >
           Hey, I'm Pruthvi! welcome to my
-        </p>
-        <h1
-          className={`${isDark ? 'text-white' : 'text-slate-950'} font-thin`}
+        </motion.p>
+        <motion.h1
+          className={`${isDark ? 'text-white' : 'text-slate-950'} font-thin pointer-events-auto cursor-default`}
+          initial={false}
+          whileHover={{
+            textShadow: isDark 
+              ? '-4px 0 0 rgba(0,255,255,0.9), 4px 0 0 rgba(255,0,255,0.9)'
+              : '-2px 0 0 rgba(0,200,255,0.8), 2px 0 0 rgba(255,0,200,0.8)',
+            letterSpacing: '0.02em',
+            scale: 1.03,
+            transition: { duration: 0.2, ease: "easeOut" }
+          }}
           style={{
             fontSize: 'clamp(64px, 10vw, 120px)',
             fontFamily: '-apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif',
@@ -213,7 +230,7 @@ export function Desktop() {
           }}
         >
           portfolio.
-        </h1>
+        </motion.h1>
       </motion.div>
 
       <div className="absolute inset-0">

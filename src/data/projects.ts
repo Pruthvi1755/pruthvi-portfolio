@@ -1,19 +1,14 @@
-﻿import blogTypeScript from '@/assets/file.png'
+import blogTypeScript from '@/assets/file.png'
 import blogThree from '@/assets/finder_light.png'
 import blogMotion from '@/assets/photos_light.png'
-import galleryOne from '@/assets/finder_dark.png'
-import galleryTwo from '@/assets/safari_dark.png'
-import galleryThree from '@/assets/photos_dark.png'
-import galleryFour from '@/assets/contact_dark.png'
-import galleryFive from '@/assets/terminal_dark.png'
-import gallerySix from '@/assets/file.png'
-import galleryShift from '@/assets/gallery_shift.svg'
-import galleryJs from '@/assets/gallery_js.svg'
-import galleryInterview from '@/assets/gallery_interview.svg'
-import galleryStage from '@/assets/gallery_stage.svg'
-import projectAnalyst from '@/assets/safari_light.png'
+import aiDataAnalyst1 from '@/assets/ai_data_analyst_1.png'
 import projectScamShield from '@/assets/file.png'
 import projectPortfolio from '@/assets/photos_light.png'
+import personal1 from '@/assets/personal_1.jpg'
+import personal2 from '@/assets/personal_2.jpg'
+import personal3 from '@/assets/personal_3.jpg'
+import personal4 from '@/assets/personal_4.jpg'
+
 
 export interface Project {
   id: string
@@ -31,8 +26,8 @@ export const projects: Project[] = [
     name: 'Automated AI Data Analyst',
     description: 'AI-powered data analysis system for automated cleaning, EDA, insight generation, ML prediction, and interactive analytics.',
     tech: ['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'FastAPI', 'React', 'PostgreSQL', 'Plotly', 'Ollama'],
-    url: 'https://github.com/Pruthvi1755',
-    image: projectAnalyst,
+    url: 'https://automated-ai-data-analyst-three.vercel.app/',
+    image: aiDataAnalyst1,
     category: 'Work',
   },
   {
@@ -89,14 +84,8 @@ export const techStack = [
 ]
 
 export const galleryImages = [
-  { id: 1, url: galleryShift, alt: 'Conference stage' },
-  { id: 2, url: galleryJs, alt: 'JavaScript mastery' },
-  { id: 3, url: galleryInterview, alt: 'Interview lounge' },
-  { id: 4, url: galleryStage, alt: 'Developer panel' },
-  { id: 5, url: galleryOne, alt: 'Finder' },
-  { id: 6, url: galleryTwo, alt: 'Safari' },
-  { id: 7, url: galleryThree, alt: 'Photos' },
-  { id: 8, url: galleryFour, alt: 'Contacts' },
-  { id: 9, url: galleryFive, alt: 'Terminal' },
-  { id: 10, url: gallerySix, alt: 'Project File' },
+  { id: 1, url: personal1, alt: 'Personal Photo 1' },
+  { id: 2, url: personal2, alt: 'Personal Photo 2' },
+  { id: 3, url: personal3, alt: 'Personal Photo 3' },
+  { id: 4, url: personal4, alt: 'Personal Photo 4' },
 ]

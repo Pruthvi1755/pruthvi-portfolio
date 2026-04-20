@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-export type AppType = 'finder' | 'safari' | 'terminal' | 'resume' | 'gallery' | 'contact'
+export type AppType = 'finder' | 'safari' | 'terminal' | 'resume' | 'gallery' | 'contact' | 'image'
 
 export interface WindowState {
   id: string
@@ -20,10 +20,14 @@ interface WindowStore {
   zIndexCounter: number
   safariUrl: string
   finderProjectId: string
+  imageUrl: string | null
+  imageTitle: string | null
   openWindow: (type: AppType) => void
   openFinderProject: (projectId: string) => void
   openSafariWithUrl: (url: string) => void
+  openImageWithUrl: (url: string, title?: string) => void
   setSafariUrl: (url: string) => void
+  setImageUrl: (url: string | null, title?: string) => void
   setFinderProjectId: (projectId: string) => void
   closeWindow: (id: string) => void
   focusWindow: (id: string) => void
@@ -41,6 +45,7 @@ const APP_DEFAULTS: Record<AppType, { title: string; size: { width: number; heig
   resume: { title: 'Resume.pdf', size: { width: 720, height: 650 } },
   gallery: { title: 'Photos', size: { width: 640, height: 460 } },
   contact: { title: 'Contact Me', size: { width: 520, height: 380 } },
+  image: { title: 'Image Viewer', size: { width: 720, height: 600 } },
 }
 
 function getInitialPosition(index: number): { x: number; y: number } {
@@ -57,8 +62,10 @@ export const useWindowStore = create<WindowStore>()(
       windows: [],
       activeWindowId: null,
       zIndexCounter: 10,
-      safariUrl: 'pruthvibe.web.app',
+      safariUrl: "pruthvi's_portfolio.com",
       finderProjectId: 'nike-ecommerce',
+      imageUrl: null,
+      imageTitle: null,
 
       openWindow: (type: AppType) => {
         const existing = get().windows.find(w => w.type === type)
@@ -104,6 +111,11 @@ export const useWindowStore = create<WindowStore>()(
         get().openWindow('finder')
       },
 
+      openImageWithUrl: (url: string, title = 'Image') => {
+        set({ imageUrl: url, imageTitle: title })
+        get().openWindow('image')
+      },
+
       openSafariWithUrl: (url: string) => {
         set({ safariUrl: url })
         get().openWindow('safari')
@@ -111,6 +123,10 @@ export const useWindowStore = create<WindowStore>()(
 
       setSafariUrl: (url: string) => {
         set({ safariUrl: url })
+      },
+
+      setImageUrl: (url: string | null, title = '') => {
+        set({ imageUrl: url, imageTitle: title })
       },
 
       setFinderProjectId: (projectId: string) => {
@@ -195,8 +211,9 @@ export const useWindowStore = create<WindowStore>()(
       partialize: (state) => ({
         windows: state.windows,
         zIndexCounter: state.zIndexCounter,
-        safariUrl: state.safariUrl,
         finderProjectId: state.finderProjectId,
+        imageUrl: state.imageUrl,
+        imageTitle: state.imageTitle,
       }),
     }
   )

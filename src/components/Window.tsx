@@ -16,6 +16,9 @@ export function Window({ window: win, children }: WindowProps) {
 
   const isActive = activeWindowId === win.id
 
+  const targetX = typeof window !== 'undefined' ? window.innerWidth / 2 - (win.position.x + win.size.width / 2) : 0
+  const targetY = typeof window !== 'undefined' ? window.innerHeight + 50 - (win.position.y + win.size.height) : 0
+
   const handleResizeMouseDown = useCallback((e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
@@ -50,15 +53,31 @@ export function Window({ window: win, children }: WindowProps) {
     <AnimatePresence>
       <motion.div
         key={win.id}
-        initial={{ scale: 0.18, opacity: 0, y: window.innerHeight - win.position.y - 90, filter: 'blur(10px)' }}
-        animate={{
-          scale: win.minimized ? 0.16 : isActive ? 1.006 : 1,
-          opacity: win.minimized ? 0 : 1,
-          y: win.minimized ? window.innerHeight - win.position.y - 86 : 0,
-          filter: win.minimized ? 'blur(6px)' : 'blur(0px)',
+        initial={{ 
+          scaleX: 0.05, 
+          scaleY: 0.05, 
+          opacity: 0, 
+          x: targetX,
+          y: targetY, 
+          filter: 'blur(10px)' 
         }}
-        exit={{ scale: 0.14, opacity: 0, y: window.innerHeight - win.position.y - 86, filter: 'blur(8px)' }}
-        transition={{ type: 'spring', stiffness: 430, damping: 34, mass: 0.75 }}
+        animate={{
+          scaleX: win.minimized ? 0.05 : (isActive ? 1.002 : 1),
+          scaleY: win.minimized ? 0.05 : (isActive ? 1.002 : 1),
+          opacity: win.minimized ? 0 : 1,
+          x: win.minimized ? targetX : 0,
+          y: win.minimized ? targetY : 0,
+          filter: win.minimized ? 'blur(10px)' : 'blur(0px)',
+        }}
+        exit={{ 
+          scaleX: 0.05, 
+          scaleY: 0.05, 
+          opacity: 0, 
+          x: targetX,
+          y: targetY, 
+          filter: 'blur(10px)' 
+        }}
+        transition={{ type: 'spring', stiffness: 350, damping: 32, mass: 0.8 }}
         style={{
           position: 'fixed',
           left: win.position.x,

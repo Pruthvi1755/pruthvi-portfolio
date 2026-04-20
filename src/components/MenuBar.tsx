@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Check, Monitor, Moon, Search, Sun, User, Wifi } from 'lucide-react'
 import { useThemeStore, type ThemeMode } from '../store/useThemeStore'
@@ -30,7 +30,7 @@ export function MenuBar() {
   }, [])
 
   const openApp = (app: 'finder' | 'contact' | 'resume') => {
-    openWindow(app)
+    openWindow(app as any)
     setOpenMenu(null)
   }
 
@@ -63,15 +63,30 @@ export function MenuBar() {
         </div>
 
         <span className="text-[15px] font-semibold opacity-90 cursor-default">Pruthvi's Portfolio</span>
-        <button onClick={() => openApp('finder')} className="text-[14px] opacity-80 hover:opacity-100 transition-opacity">Projects</button>
-        <button onClick={() => openApp('contact')} className="text-[14px] opacity-80 hover:opacity-100 transition-opacity">Contact</button>
-        <button onClick={() => openApp('resume')} className="text-[14px] opacity-80 hover:opacity-100 transition-opacity">Resume</button>
+        <button onClick={() => openApp('finder')} className="relative group text-[14px] opacity-80 transition-opacity">
+          Projects
+          <span className="absolute left-0 right-0 -bottom-1 h-[2px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-full"></span>
+        </button>
+        <button onClick={() => openApp('resume')} className="relative group text-[14px] opacity-80 transition-opacity">
+          Resume
+          <span className="absolute left-0 right-0 -bottom-1 h-[2px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-full"></span>
+        </button>
+        <button onClick={() => openApp('contact')} className="relative group text-[14px] opacity-80 transition-opacity">
+          Contact
+          <span className="absolute left-0 right-0 -bottom-1 h-[2px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-full"></span>
+        </button>
       </div>
 
-      <div className="flex items-center gap-3">
-        <Wifi size={14} className="opacity-80" />
-        <Search size={14} className="opacity-80 cursor-pointer hover:opacity-100 transition-opacity" />
-        <User size={14} className="opacity-80" />
+      <div className="flex items-center gap-2">
+        <button className="w-8 h-8 rounded-md flex items-center justify-center opacity-80 hover:opacity-100 hover:bg-white/18 transition-all">
+          <Wifi size={14} />
+        </button>
+        <button className="w-8 h-8 rounded-md flex items-center justify-center opacity-80 hover:opacity-100 hover:bg-white/18 transition-all">
+          <Search size={14} />
+        </button>
+        <button className="w-8 h-8 rounded-md flex items-center justify-center opacity-80 hover:opacity-100 hover:bg-white/18 transition-all">
+          <User size={14} />
+        </button>
         <div className="relative">
           <button
             onClick={() => setOpenMenu(openMenu === 'theme' ? null : 'theme')}

@@ -16,6 +16,7 @@ const TerminalApp = lazy(() => import('./apps/Terminal/App').then(m => ({ defaul
 const ResumeApp = lazy(() => import('./apps/Resume/App').then(m => ({ default: m.ResumeApp })))
 const GalleryApp = lazy(() => import('./apps/Gallery/App').then(m => ({ default: m.GalleryApp })))
 const ContactApp = lazy(() => import('./apps/Contact/App').then(m => ({ default: m.ContactApp })))
+const ImageViewerApp = lazy(() => import('./apps/ImageViewer/App').then(m => ({ default: m.ImageViewerApp })))
 
 function AppContent({ type }: { type: AppType }) {
   switch (type) {
@@ -25,6 +26,7 @@ function AppContent({ type }: { type: AppType }) {
     case 'resume': return <ResumeApp />
     case 'gallery': return <GalleryApp />
     case 'contact': return <ContactApp />
+    case 'image': return <ImageViewerApp />
     default: return null
   }
 }

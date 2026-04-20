@@ -1,19 +1,24 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FileText, Folder, Search, Trash, X } from 'lucide-react'
 import safariIcon from '@/assets/safari_light.png'
+import folderIcon from '@/assets/Folder.png'
 import imageFileIcon from '@/assets/finder_image_file.png'
 import defaultFileIcon from '@/assets/finder_default_file.png'
 import textFileIcon from '@/assets/finder_text_file.png'
 import { projects } from '../../data/projects'
+import { aiDataAnalystReadme } from '../../data/readme'
 import { useWindowStore } from '../../store/useWindowStore'
 
-type FileType = 'app' | 'txt' | 'png' | 'fig'
+type FileType = 'app' | 'txt' | 'png' | 'fig' | 'folder'
 
 interface FileItem {
   name: string
   type: FileType
   icon: React.ReactNode
+  url?: string
+  projectId?: string
+  content?: string
 }
 
 interface PreviewState {
@@ -32,26 +37,33 @@ const FILE_ICONS: Record<FileType, React.ReactNode> = {
   txt: <FinderFileIcon src={textFileIcon} alt="Text file" />,
   png: <FinderFileIcon src={imageFileIcon} alt="Image file" />,
   fig: <FinderFileIcon src={defaultFileIcon} alt="Default file" />,
+  folder: <FinderFileIcon src={folderIcon} alt="Folder" />,
 }
 
 function getFilesForProject(projectId: string): FileItem[] {
   const map: Record<string, FileItem[]> = {
     'nike-ecommerce': [
-      { name: 'ai-data-analyst.github', type: 'app', icon: FILE_ICONS.app },
+      { name: 'ai-data-analyst.app', type: 'app', icon: FILE_ICONS.app, url: 'https://automated-ai-data-analyst-three.vercel.app/' },
       { name: 'Automated AI Data Analyst.txt', type: 'txt', icon: FILE_ICONS.txt },
       { name: 'ai-data-analyst.png', type: 'png', icon: FILE_ICONS.png },
-      { name: 'Pipeline.fig', type: 'fig', icon: FILE_ICONS.fig },
+      { name: 'ai-data-analyst-screenshot-2.png', type: 'png', icon: FILE_ICONS.png },
+      { name: 'ai-data-analyst-screenshot-3.png', type: 'png', icon: FILE_ICONS.png },
+      { name: 'README.md', type: 'txt', icon: FILE_ICONS.txt, content: aiDataAnalystReadme },
     ],
     'ai-resume-analyzer': [
       { name: 'scamshield.github', type: 'app', icon: FILE_ICONS.app },
       { name: 'ScamShield Project.txt', type: 'txt', icon: FILE_ICONS.txt },
       { name: 'scamshield.png', type: 'png', icon: FILE_ICONS.png },
+      { name: 'detection-logic.png', type: 'png', icon: FILE_ICONS.png },
+      { name: 'architecture.png', type: 'png', icon: FILE_ICONS.png },
       { name: 'System Design.fig', type: 'fig', icon: FILE_ICONS.fig },
     ],
     'food-delivery-app': [
       { name: 'portfolio-web.app', type: 'app', icon: FILE_ICONS.app },
       { name: 'Portfolio Web App.txt', type: 'txt', icon: FILE_ICONS.txt },
       { name: 'portfolio-web.png', type: 'png', icon: FILE_ICONS.png },
+      { name: 'ui-design-1.png', type: 'png', icon: FILE_ICONS.png },
+      { name: 'ui-design-2.png', type: 'png', icon: FILE_ICONS.png },
       { name: 'Interface.fig', type: 'fig', icon: FILE_ICONS.fig },
     ],
   }
@@ -63,21 +75,40 @@ export function FinderApp() {
   const [searchQuery, setSearchQuery] = useState('')
   const [preview, setPreview] = useState<PreviewState | null>(null)
   const openWindow = useWindowStore(s => s.openWindow)
-  const openSafariWithUrl = useWindowStore(s => s.openSafariWithUrl)
+  const openImageWithUrl = useWindowStore(s => s.openImageWithUrl)
   const selectedProject = useWindowStore(s => s.finderProjectId)
   const setSelectedProject = useWindowStore(s => s.setFinderProjectId)
 
   const currentProject = projects.find(p => p.id === selectedProject) ?? projects[0]
   const files = getFilesForProject(selectedProject)
-  const resumeFiles: FileItem[] = [{ name: 'Resume.pdf', type: 'txt', icon: <FileText size={32} className="text-white/80" /> }]
-  const visibleFiles = activeSidebar === 'Resume' ? resumeFiles : files
+  
+  const resumeFiles: FileItem[] = [
+    { name: 'Fullstack Resume.pdf', type: 'txt', icon: <FileText size={32} className="text-white/80" /> },
+    { name: 'AI/ML Resume.pdf', type: 'txt', icon: <FileText size={32} className="text-white/80" /> }
+  ]
+  const workFolders: FileItem[] = projects.map(p => ({
+    name: p.name,
+    type: 'folder',
+    icon: FILE_ICONS.folder,
+    projectId: p.id
+  }))
+
+  let visibleFiles = files
+  if (activeSidebar === 'Resume') {
+    visibleFiles = resumeFiles
+  } else if (activeSidebar === 'Work') {
+    visibleFiles = workFolders
+  } else if (activeSidebar === 'Trash') {
+    visibleFiles = []
+  }
+
   const filteredFiles = visibleFiles.filter(f => f.name.toLowerCase().includes(searchQuery.toLowerCase()))
 
   const sidebarSections = [
     {
       title: 'Favorites',
-      items: ['Work', 'About me', 'Resume', 'Trash'],
-      icons: [Folder, Search, FileText, FileText],
+      items: ['Work', 'Resume', 'Trash'],
+      icons: [Folder, FileText, Trash],
     },
     {
       title: 'Work',
@@ -88,13 +119,24 @@ export function FinderApp() {
   ]
 
   const handleFileClick = (file: FileItem) => {
+    if (file.type === 'folder' && file.projectId) {
+      setSelectedProject(file.projectId)
+      setActiveSidebar(file.projectId)
+      return
+    }
+
     if (activeSidebar === 'Resume') {
       openWindow('resume')
       return
     }
 
     if (file.type === 'app') {
-      openSafariWithUrl(currentProject.url ?? `https://${file.name}`)
+      window.open(file.url ?? currentProject.url ?? `https://${file.name}`, '_blank')
+      return
+    }
+
+    if (file.type === 'png') {
+      openImageWithUrl(file.url ?? currentProject.image, file.name)
       return
     }
 
@@ -118,7 +160,7 @@ export function FinderApp() {
               const Icon = item === 'Trash' ? Trash : section.icons[i]
               const isProject = 'projectIds' in section
               const projId = isProject ? section.projectIds![i] : null
-              const isActive = isProject ? selectedProject === projId : activeSidebar === item
+              const isActive = isProject ? activeSidebar === projId : activeSidebar === item
 
               return (
                 <button
@@ -126,7 +168,7 @@ export function FinderApp() {
                   onClick={() => {
                     if (isProject && projId) {
                       setSelectedProject(projId)
-                      setActiveSidebar('Work')
+                      setActiveSidebar(projId)
                     } else {
                       setActiveSidebar(item)
                     }
@@ -162,7 +204,17 @@ export function FinderApp() {
         {activeSidebar === 'Resume' ? (
           <div className="px-4 py-2 border-b border-white/8">
             <h3 className="text-white/84 text-[12px] font-medium">Resume</h3>
-            <p className="text-white/44 text-[10px] mt-0.5">Computer Science Engineering resume PDF</p>
+            <p className="text-white/44 text-[10px] mt-0.5">Dual profiles: AI/ML and Fullstack Development</p>
+          </div>
+        ) : activeSidebar === 'Work' ? (
+          <div className="px-4 py-2 border-b border-white/8">
+            <h3 className="text-white/84 text-[12px] font-medium">Work</h3>
+            <p className="text-white/44 text-[10px] mt-0.5">Projects and case studies</p>
+          </div>
+        ) : activeSidebar === 'Trash' ? (
+          <div className="px-4 py-2 border-b border-white/8">
+            <h3 className="text-white/84 text-[12px] font-medium">Trash</h3>
+            <p className="text-white/44 text-[10px] mt-0.5">No items</p>
           </div>
         ) : (
           <div className="px-4 py-2 border-b border-white/8">
@@ -249,8 +301,8 @@ function PreviewModal({ preview, onClose }: { preview: PreviewState; onClose: ()
         )}
 
         {file.type === 'txt' && (
-          <div className="p-5 font-mono text-[12px] leading-6 text-white/76 whitespace-pre-wrap">
-            {`${projectName}\n\n${description}\n\nStack: ${projects.find(p => p.name === projectName)?.tech.join(', ') ?? 'React, TypeScript'}\n\nStatus: polished portfolio case study ready for review.`}
+          <div className="p-5 font-mono text-[12px] leading-6 text-white/76 whitespace-pre-wrap overflow-y-auto max-h-[60vh]">
+            {file.content ? file.content : `${projectName}\n\n${description}\n\nStack: ${projects.find(p => p.name === projectName)?.tech.join(', ') ?? 'React, TypeScript'}\n\nStatus: polished portfolio case study ready for review.`}
           </div>
         )}
 
