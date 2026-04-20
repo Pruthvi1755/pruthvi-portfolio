@@ -24,7 +24,7 @@ const staggerContainer = {
 export function SafariContent() {
   return (
     <div className="flex-1 overflow-y-auto scroll-smooth bg-[#111111] text-white selection:bg-[#ff3b6b]/30">
-      <div className="max-w-4xl mx-auto px-6 sm:px-10 py-20 pb-32 flex flex-col gap-32">
+      <div className="max-w-5xl mx-auto px-6 sm:px-12 py-24 pb-48 flex flex-col gap-40">
         <HeroSection />
         <AboutSection />
         <SkillsSection />
@@ -51,15 +51,15 @@ function HeroSection() {
         viewport={{ once: true }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-0"
       >
-        <h2 className="text-7xl md:text-[140px] font-black text-white/5 tracking-tighter uppercase">
+        <h2 className="text-8xl md:text-[170px] font-black text-white/5 tracking-tighter uppercase">
           portfolio.
         </h2>
       </motion.div>
 
-      <motion.p variants={fadeInUp} className="text-[#ff3b6b] font-medium text-lg tracking-wide mb-4 z-10 w-full">
+      <motion.p variants={fadeInUp} className="text-[#ff3b6b] font-medium text-xl tracking-wide mb-6 z-10 w-full">
         Hey, I'm Pruthvi
       </motion.p>
-      <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-bold tracking-tight mb-6 z-10 w-full">
+      <motion.h1 variants={fadeInUp} className="text-6xl md:text-8xl font-bold tracking-tight mb-8 z-10 w-full">
         AI/ML Full Stack <br/> <span className="text-white/80">Developer</span>
       </motion.h1>
       
@@ -80,12 +80,12 @@ function AboutSection() {
       className="relative group"
     >
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-      <div className="relative p-10 md:p-14 rounded-3xl border border-white/5 bg-white/5 backdrop-blur-md shadow-2xl overflow-hidden text-center md:text-left">
-        <h2 className="text-2xl font-bold mb-6 flex items-center justify-center md:justify-start gap-3">
-          <Briefcase className="text-[#ff3b6b]" />
+      <div className="relative p-12 md:p-16 rounded-3xl border border-white/5 bg-white/5 backdrop-blur-md shadow-2xl overflow-hidden text-center md:text-left">
+        <h2 className="text-3xl font-bold mb-8 flex items-center justify-center md:justify-start gap-4">
+          <Briefcase className="text-[#ff3b6b] w-8 h-8" />
           About Me
         </h2>
-        <p className="text-white/70 text-base md:text-lg leading-relaxed font-light">
+        <p className="text-white/70 text-lg md:text-xl leading-relaxed font-light">
           AI/ML-focused Full Stack Developer with strong expertise in Python and JavaScript, building end-to-end intelligent systems from UI to ML pipelines. Experienced in deploying real-world applications including OCR-based health platforms, fraud detection systems, and automated data analytics tools.
         </p>
       </div>
@@ -107,11 +107,11 @@ function SkillsSection() {
       <motion.h2 variants={fadeInUp} className="text-white/50 text-sm tracking-[0.2em] uppercase mb-8">
         Technical Arsenal
       </motion.h2>
-      <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-4 max-w-2xl">
+      <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-6 max-w-3xl">
         {skills.map((skill) => (
           <div 
             key={skill} 
-            className="px-6 py-3 rounded-full border border-white/10 bg-white/5 backdrop-blur hover:bg-white/10 hover:-translate-y-1 hover:border-[#ff3b6b]/50 transition-all cursor-pointer text-sm font-medium tracking-wide"
+            className="px-8 py-4 rounded-full border border-white/10 bg-white/5 backdrop-blur hover:bg-white/10 hover:-translate-y-1 hover:border-[#ff3b6b]/50 transition-all cursor-pointer text-base font-medium tracking-wide"
           >
             {skill}
           </div>
@@ -152,14 +152,14 @@ function LifeOutsideSection() {
         <div className="w-12 h-1 bg-[#ff3b6b] mx-auto rounded-full" />
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {cards.map((card, idx) => (
           <motion.div 
             variants={fadeInUp} 
             key={idx} 
             className="group rounded-2xl border border-white/10 bg-white/5 overflow-hidden flex flex-col hover:border-white/20 transition-all hover:shadow-2xl"
           >
-            <div className="relative h-48 overflow-hidden bg-black/50">
+            <div className="relative h-64 overflow-hidden bg-black/50">
               <img 
                 src={card.image} 
                 alt={card.title} 
@@ -167,9 +167,9 @@ function LifeOutsideSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-80" />
             </div>
-            <div className="p-6 flex-1 flex flex-col bg-[#161616]">
-              <h3 className="text-lg font-bold text-white/95 mb-3 group-hover:text-[#ff3b6b] transition-colors">{card.title}</h3>
-              <p className="text-white/60 text-sm leading-relaxed flex-1">{card.description}</p>
+            <div className="p-8 flex-1 flex flex-col bg-[#161616]">
+              <h3 className="text-2xl font-bold text-white/95 mb-4 group-hover:text-[#ff3b6b] transition-colors">{card.title}</h3>
+              <p className="text-white/60 text-base leading-relaxed flex-1">{card.description}</p>
             </div>
           </motion.div>
         ))}
@@ -185,33 +185,33 @@ function ContactSection() {
       whileInView="visible" 
       viewport={{ once: true, margin: "-100px" }}
       variants={fadeInUp}
-      className="text-center pt-10 border-t border-white/10"
+      className="text-center pt-16 border-t border-white/10"
     >
-      <h2 className="text-2xl font-bold mb-8">Let's Connect</h2>
-      <div className="flex items-center justify-center gap-6">
+      <h2 className="text-3xl font-bold mb-10">Let's Connect</h2>
+      <div className="flex items-center justify-center gap-8">
         <a 
           href="mailto:stevepruthvi@gmail.com" 
-          className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-[#ff3b6b] hover:-translate-y-1 transition-all"
+          className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-[#ff3b6b] hover:-translate-y-1 transition-all"
           target="_blank"
           rel="noreferrer"
         >
-          <Mail size={20} />
+          <Mail size={24} />
         </a>
         <a 
           href="https://github.com/Pruthvi1755" 
-          className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-[#ff3b6b] hover:-translate-y-1 transition-all"
+          className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-[#ff3b6b] hover:-translate-y-1 transition-all"
           target="_blank"
           rel="noreferrer"
         >
-          <Github size={20} />
+          <Github size={24} />
         </a>
         <a 
           href="https://www.linkedin.com/in/pruthvi-t-s-1547392a2/" 
-          className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-[#ff3b6b] hover:-translate-y-1 transition-all"
+          className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 hover:text-[#ff3b6b] hover:-translate-y-1 transition-all"
           target="_blank"
           rel="noreferrer"
         >
-          <Linkedin size={20} />
+          <Linkedin size={24} />
         </a>
       </div>
     </motion.section>

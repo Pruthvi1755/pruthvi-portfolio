@@ -21,9 +21,9 @@ const DESKTOP_ICONS: DesktopIcon[] = [
 type DesktopIconPositions = Record<string, { x: number; y: number }>
 
 const DEFAULT_ICON_POSITIONS: DesktopIconPositions = {
-  nike: { x: 48, y: 104 },
-  ai: { x: 48, y: 254 },
-  food: { x: 48, y: 384 },
+  nike: { x: 50, y: 110 },
+  ai: { x: 50, y: 280 },
+  food: { x: 50, y: 450 },
 }
 
 function loadIconPositions(): DesktopIconPositions {
@@ -124,15 +124,15 @@ function FolderIcon({
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerCancel}
       tabIndex={0}
-      className="absolute left-0 top-0 flex flex-col items-center gap-1 cursor-grab active:cursor-grabbing w-[120px] focus:outline-none touch-none group"
+      className="absolute left-0 top-0 flex flex-col items-center gap-2 cursor-grab active:cursor-grabbing w-[140px] focus:outline-none touch-none group"
       style={{ left: position.x, top: position.y }}
     >
-      <div className="relative w-16 h-14">
+      <div className="relative w-20 h-18">
         <img src={folderIcon} alt="" className="w-full h-full object-contain drop-shadow-lg" draggable={false} />
       </div>
       <span
-        className="text-white text-[14px] text-center leading-tight px-2 py-1 rounded-md max-w-[120px] line-clamp-2 whitespace-pre-line transition-colors group-hover:bg-blue-600/80"
-        style={{ textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}
+        className="text-white text-base text-center leading-tight px-2 py-1 rounded-md max-w-[140px] line-clamp-2 whitespace-pre-line transition-colors group-hover:bg-blue-600/80"
+        style={{ textShadow: '0 1px 4px rgba(0,0,0,0.9)' }}
       >
         {icon.label}
       </span>
@@ -154,8 +154,8 @@ export function Desktop() {
 
   const moveIcon = (id: string, nextPosition: { x: number; y: number }) => {
     const clampedPosition = {
-      x: Math.max(0, Math.min(nextPosition.x, window.innerWidth - 140)),
-      y: Math.max(52, Math.min(nextPosition.y, window.innerHeight - 170)),
+      x: Math.max(0, Math.min(nextPosition.x, window.innerWidth - 180)),
+      y: Math.max(52, Math.min(nextPosition.y, window.innerHeight - 200)),
     }
 
     setIconPositions(current => ({ ...current, [id]: clampedPosition }))
@@ -196,7 +196,7 @@ export function Desktop() {
         style={{ marginTop: '28px', paddingBottom: '80px' }}
       >
         <motion.p 
-          className={`${isDark ? 'text-white/58' : 'text-slate-900/55'} text-lg font-light mb-2 pointer-events-auto cursor-default`}
+          className={`${isDark ? 'text-white/58' : 'text-slate-900/55'} text-2xl font-light mb-4 pointer-events-auto cursor-default`}
           initial={false}
           whileHover={{
             textShadow: isDark 
@@ -205,7 +205,7 @@ export function Desktop() {
             scale: 1.02,
             transition: { duration: 0.2, ease: "easeOut" }
           }}
-          style={{ textShadow: isDark ? '0 2px 8px rgba(0,0,0,0.4)' : '0 2px 12px rgba(255,255,255,0.55)' }}
+          style={{ textShadow: isDark ? '0 2px 10px rgba(0,0,0,0.5)' : '0 2px 14px rgba(255,255,255,0.6)' }}
         >
           Hey, I'm Pruthvi! welcome to my
         </motion.p>
@@ -221,11 +221,11 @@ export function Desktop() {
             transition: { duration: 0.2, ease: "easeOut" }
           }}
           style={{
-            fontSize: 'clamp(64px, 10vw, 120px)',
+            fontSize: 'clamp(80px, 12vw, 160px)',
             fontFamily: '-apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif',
             fontStyle: 'italic',
             letterSpacing: '0',
-            textShadow: isDark ? '0 4px 20px rgba(0,0,0,0.3)' : '0 4px 20px rgba(255,255,255,0.5)',
+            textShadow: isDark ? '0 4px 24px rgba(0,0,0,0.35)' : '0 4px 24px rgba(255,255,255,0.55)',
             opacity: 0.9,
           }}
         >

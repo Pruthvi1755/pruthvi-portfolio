@@ -36,7 +36,7 @@ export function MenuBar() {
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 h-11 z-[9999] flex items-center px-5 justify-between transition-colors duration-300"
+      className="fixed top-0 left-0 right-0 h-14 z-[9999] flex items-center px-6 justify-between transition-colors duration-300"
       style={{
         background: isDark ? 'rgba(0,0,0,0.48)' : 'rgba(255,255,255,0.48)',
         backdropFilter: 'blur(22px) saturate(180%)',
@@ -49,9 +49,9 @@ export function MenuBar() {
         <div className="relative">
           <button
             onClick={() => setOpenMenu(openMenu === 'apple' ? null : 'apple')}
-            className="h-9 flex items-center opacity-90 hover:opacity-100 transition-opacity"
+            className="h-10 flex items-center opacity-90 hover:opacity-100 transition-opacity"
           >
-            <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
               <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
             </svg>
           </button>
@@ -62,53 +62,53 @@ export function MenuBar() {
           </MenuDropdown>
         </div>
 
-        <span className="text-[15px] font-semibold opacity-90 cursor-default">Pruthvi's Portfolio</span>
-        <button onClick={() => openApp('finder')} className="relative group text-[14px] opacity-80 transition-opacity">
+        <span className="text-lg font-semibold opacity-90 cursor-default">Pruthvi's Portfolio</span>
+        <button onClick={() => openApp('finder')} className="relative group text-base opacity-80 transition-opacity">
           Projects
           <span className="absolute left-0 right-0 -bottom-1 h-[2px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-full"></span>
         </button>
-        <button onClick={() => openApp('resume')} className="relative group text-[14px] opacity-80 transition-opacity">
+        <button onClick={() => openApp('resume')} className="relative group text-base opacity-80 transition-opacity">
           Resume
           <span className="absolute left-0 right-0 -bottom-1 h-[2px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-full"></span>
         </button>
-        <button onClick={() => openApp('contact')} className="relative group text-[14px] opacity-80 transition-opacity">
+        <button onClick={() => openApp('contact')} className="relative group text-base opacity-80 transition-opacity">
           Contact
           <span className="absolute left-0 right-0 -bottom-1 h-[2px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-full"></span>
         </button>
       </div>
 
-      <div className="flex items-center gap-2">
-        <button className="w-8 h-8 rounded-md flex items-center justify-center opacity-80 hover:opacity-100 hover:bg-white/18 transition-all">
-          <Wifi size={14} />
+      <div className="flex items-center gap-3">
+        <button className="w-10 h-10 rounded-md flex items-center justify-center opacity-80 hover:opacity-100 hover:bg-white/18 transition-all">
+          <Wifi size={18} />
         </button>
-        <button className="w-8 h-8 rounded-md flex items-center justify-center opacity-80 hover:opacity-100 hover:bg-white/18 transition-all">
-          <Search size={14} />
+        <button className="w-10 h-10 rounded-md flex items-center justify-center opacity-80 hover:opacity-100 hover:bg-white/18 transition-all">
+          <Search size={18} />
         </button>
-        <button className="w-8 h-8 rounded-md flex items-center justify-center opacity-80 hover:opacity-100 hover:bg-white/18 transition-all">
-          <User size={14} />
+        <button className="w-10 h-10 rounded-md flex items-center justify-center opacity-80 hover:opacity-100 hover:bg-white/18 transition-all">
+          <User size={18} />
         </button>
         <div className="relative">
           <button
             onClick={() => setOpenMenu(openMenu === 'theme' ? null : 'theme')}
-            className={`w-8 h-8 rounded-md flex items-center justify-center opacity-80 hover:opacity-100 transition-all ${
+            className={`w-10 h-10 rounded-md flex items-center justify-center opacity-80 hover:opacity-100 transition-all ${
               openMenu === 'theme' ? 'bg-white/22' : 'hover:bg-white/18'
             }`}
           >
-            {isDark ? <Moon size={14} /> : <Sun size={14} />}
+            {isDark ? <Moon size={18} /> : <Sun size={18} />}
           </button>
           <MenuDropdown open={openMenu === 'theme'} align="right">
             {themeItems.map(({ mode: itemMode, label, Icon }) => (
               <MenuButton key={itemMode} onClick={() => setMode(itemMode)}>
                 <span className="flex items-center gap-2">
-                  <Icon size={13} />
+                  <Icon size={16} />
                   {label}
                 </span>
-                {mode === itemMode && <Check size={13} />}
+                {mode === itemMode && <Check size={16} />}
               </MenuButton>
             ))}
           </MenuDropdown>
         </div>
-        <span className="text-[14px] opacity-80 font-medium tabular-nums">
+        <span className="text-base opacity-80 font-medium tabular-nums px-2">
           {formatDate(time)} {formatTime(time)}
         </span>
       </div>
@@ -138,7 +138,7 @@ function MenuButton({ children, onClick }: { children: React.ReactNode; onClick:
   return (
     <button
       onClick={onClick}
-      className="w-full flex items-center justify-between rounded-md px-2.5 py-1.5 text-left text-[12px] text-white/88 hover:bg-blue-500/70 transition-colors"
+      className="w-full flex items-center justify-between rounded-md px-3 py-2 text-left text-[14px] text-white/88 hover:bg-blue-500/70 transition-colors"
     >
       {children}
     </button>

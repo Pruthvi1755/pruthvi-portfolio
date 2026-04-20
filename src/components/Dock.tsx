@@ -1,4 +1,4 @@
-﻿﻿import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import { useWindowStore, type AppType } from '../store/useWindowStore'
 import { useThemeStore } from '../store/useThemeStore'
 import finderDark from '@/assets/finder_dark.png'
@@ -44,17 +44,17 @@ function DockIcon({ item, isOpen }: { item: DockItem; isOpen: boolean }) {
     <div className="flex flex-col items-center relative">
       <motion.button
         onClick={handleClick}
-        whileHover={{ scale: 1.35, y: -8 }}
+        whileHover={{ scale: 1.5, y: -10 }}
         whileTap={{ scale: 0.9, y: -2 }}
         transition={{ type: 'spring', stiffness: 520, damping: 24, mass: 0.55 }}
-        className={`w-12 h-12 rounded-[10px] flex items-center justify-center relative ${
+        className={`w-14 h-14 rounded-[12px] flex items-center justify-center relative ${
           item.disabled ? 'opacity-60 cursor-default' : 'cursor-pointer'
         }`}
       >
         <img
           src={theme === 'dark' ? item.darkIcon : item.lightIcon}
           alt={item.label}
-          className="w-12 h-12 object-contain rounded-[10px] drop-shadow-lg"
+          className="w-14 h-14 object-contain rounded-[12px] drop-shadow-lg"
           draggable={false}
         />
       </motion.button>
@@ -74,15 +74,15 @@ export function Dock() {
   const isDark = theme === 'dark'
 
   return (
-    <div className="fixed bottom-3 left-1/2 -translate-x-1/2 z-[9998]">
+    <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-[9998]">
       <motion.div
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.3, type: 'spring', stiffness: 200, damping: 25 }}
-        className="flex items-end gap-4 px-4 py-2.5 rounded-2xl"
+        className="flex items-end gap-6 px-5 py-3 rounded-2xl"
         style={{
           background: isDark ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.58)',
-          backdropFilter: 'blur(22px) saturate(180%)',
+          backdropFilter: 'blur(24px) saturate(180%)',
           WebkitBackdropFilter: 'blur(22px) saturate(180%)',
           border: isDark ? '1px solid rgba(255,255,255,0.2)' : '1px solid rgba(255,255,255,0.75)',
           boxShadow: isDark
