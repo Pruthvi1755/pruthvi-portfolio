@@ -11,8 +11,8 @@
     "postinstall": "chmod +x node_modules/.bin/vite"
   },
   "engines": {
-  "node": "18.x"
-},
+    "node": "24.x"
+  },
   "dependencies": {
     "framer-motion": "^11.0.0",
     "lucide-react": "^0.383.0",
