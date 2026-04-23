@@ -22,6 +22,7 @@ interface WindowStore {
   finderProjectId: string
   imageUrl: string | null
   imageTitle: string | null
+  iconPositions: Record<string, { x: number; y: number }>
   openWindow: (type: AppType) => void
   openFinderProject: (projectId: string) => void
   openSafariWithUrl: (url: string) => void
@@ -29,6 +30,7 @@ interface WindowStore {
   setSafariUrl: (url: string) => void
   setImageUrl: (url: string | null, title?: string) => void
   setFinderProjectId: (projectId: string) => void
+  setIconPosition: (type: AppType, position: { x: number; y: number }) => void
   closeWindow: (id: string) => void
   focusWindow: (id: string) => void
   minimizeWindow: (id: string) => void
@@ -43,7 +45,7 @@ const APP_DEFAULTS: Record<AppType, { title: string; size: { width: number; heig
   safari: { title: 'Safari', size: { width: 680, height: 520 } },
   terminal: { title: 'Terminal', size: { width: 560, height: 400 } },
   resume: { title: 'Resume.pdf', size: { width: 720, height: 650 } },
-  gallery: { title: 'Photos', size: { width: 640, height: 460 } },
+  gallery: { title: 'Photos', size: { width: 880, height: 580 } },
   contact: { title: 'Contact Me', size: { width: 520, height: 380 } },
   image: { title: 'Image Viewer', size: { width: 720, height: 600 } },
 }
@@ -66,6 +68,7 @@ export const useWindowStore = create<WindowStore>()(
       finderProjectId: 'nike-ecommerce',
       imageUrl: null,
       imageTitle: null,
+      iconPositions: {},
 
       openWindow: (type: AppType) => {
         const existing = get().windows.find(w => w.type === type)
@@ -131,6 +134,12 @@ export const useWindowStore = create<WindowStore>()(
 
       setFinderProjectId: (projectId: string) => {
         set({ finderProjectId: projectId })
+      },
+
+      setIconPosition: (type: AppType, position: { x: number; y: number }) => {
+        set(state => ({
+          iconPositions: { ...state.iconPositions, [type]: position }
+        }))
       },
 
       closeWindow: (id: string) => {

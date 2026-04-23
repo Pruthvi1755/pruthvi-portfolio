@@ -14,7 +14,7 @@ interface DesktopIcon {
 
 const DESKTOP_ICONS: DesktopIcon[] = [
   { id: 'nike', label: 'Automated AI\nData Analyst', project: 'nike-ecommerce' },
-  { id: 'ai', label: 'ScamShield', project: 'ai-resume-analyzer' },
+  { id: 'phish', label: 'PhishGuard\nAI Detection', project: 'phish-guard' },
   { id: 'food', label: 'Portfolio Web App', project: 'food-delivery-app' },
 ]
 
@@ -22,7 +22,7 @@ type DesktopIconPositions = Record<string, { x: number; y: number }>
 
 const DEFAULT_ICON_POSITIONS: DesktopIconPositions = {
   nike: { x: 50, y: 110 },
-  ai: { x: 50, y: 280 },
+  phish: { x: 50, y: 280 },
   food: { x: 50, y: 450 },
 }
 

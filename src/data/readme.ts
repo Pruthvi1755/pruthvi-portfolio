@@ -1,4 +1,4 @@
-export const aiDataAnalystReadme = `🚀 Autonomous AI Data Analyst
+export const aiDataAnalystReadme = `🚀 DataMind — Autonomous AI Data Analyst
 
 An end-to-end AI-powered data analysis system that automatically processes datasets, understands natural language queries, and generates insights with visualizations.
 
@@ -122,5 +122,52 @@ Fine-tuned domain-specific LLM
 Pruthvi T.S
 
 Full Stack Developer
-AI/ML Enthusiast
 Data Science Practitioner`
+
+export const phishGuardReadme = `⚡ PhishGuard — AI Phishing Detection System
+
+Final-year project: ML-powered URL threat assessment. 90.76% accuracy on 2,488-URL dataset.
+
+🏗 Architecture
+┌─────────────────────────────────────────────────────┐
+│  FRONTEND  React + Vite  :5173                       │
+│  InputForm → axios POST /predict                    │
+└──────────────────────┬──────────────────────────────┘
+                       │  { "url": "https://..." }
+                       ▼
+┌─────────────────────────────────────────────────────┐
+│  BACKEND  FastAPI  :8000                             │
+│  1. url_validator.py     → structural checks         │
+│  2. feature_extractor.py → 13 numeric features       │
+│  3. model.pkl            → predict_proba()           │
+│  4. _build_explanations  → human-readable reasons    │
+└──────────────────────┬──────────────────────────────┘
+                       │  [[f1, f2, ..., f13]]
+                       ▼
+┌─────────────────────────────────────────────────────┐
+│  ML MODEL  GradientBoostingClassifier + Scaler       │
+│  Accuracy: 90.76% · ROC-AUC: 0.96+                  │
+│  Returns: [P(legit), P(phishing)]                    │
+└─────────────────────────────────────────────────────┘
+
+🧩 Features Extracted
+- url_length: Total character count of URL
+- valid_url: Structural validity (has scheme + host)
+- at_symbol: Presence of @ (domain-spoofing trick)
+- sensitive_words_count: Count of keywords like login, verify, secure
+- path_length: Length of URL path component
+- isHttps: 1 if HTTPS, 0 if HTTP
+- nb_dots, nb_hyphens, nb_and, nb_or, nb_underscore
+- nb_www, nb_com
+
+📊 Model Performance
+- Dataset: 2,488 URLs (1,313 legitimate, 1,175 phishing)
+- Algorithm: GradientBoostingClassifier (200 estimators, depth=5, lr=0.1)
+- Accuracy: 90.76%
+- Precision (Phishing): 93%
+- Recall (Phishing): 87%
+- 5-fold CV: 0.912 ± 0.015
+
+👤 Author
+Pruthvi T.S
+AI/ML Developer`

@@ -6,8 +6,8 @@ import folderIcon from '@/assets/Folder.png'
 import imageFileIcon from '@/assets/finder_image_file.png'
 import defaultFileIcon from '@/assets/finder_default_file.png'
 import textFileIcon from '@/assets/finder_text_file.png'
-import { projects } from '../../data/projects'
-import { aiDataAnalystReadme } from '../../data/readme'
+import { projects, aiAnalystScreenshots } from '../../data/projects'
+import { aiDataAnalystReadme, phishGuardReadme } from '../../data/readme'
 import { useWindowStore } from '../../store/useWindowStore'
 
 type FileType = 'app' | 'txt' | 'png' | 'fig' | 'folder'
@@ -45,18 +45,16 @@ function getFilesForProject(projectId: string): FileItem[] {
     'nike-ecommerce': [
       { name: 'ai-data-analyst.app', type: 'app', icon: FILE_ICONS.app, url: 'https://automated-ai-data-analyst-three.vercel.app/' },
       { name: 'Automated AI Data Analyst.txt', type: 'txt', icon: FILE_ICONS.txt },
-      { name: 'ai-data-analyst.png', type: 'png', icon: FILE_ICONS.png },
-      { name: 'ai-data-analyst-screenshot-2.png', type: 'png', icon: FILE_ICONS.png },
-      { name: 'ai-data-analyst-screenshot-3.png', type: 'png', icon: FILE_ICONS.png },
+      { name: 'ai-data-analyst.png', type: 'png', icon: FILE_ICONS.png, url: aiAnalystScreenshots[1] },
+      { name: 'ai-data-analyst-screenshot-2.png', type: 'png', icon: FILE_ICONS.png, url: aiAnalystScreenshots[2] },
+      { name: 'ai-data-analyst-screenshot-3.png', type: 'png', icon: FILE_ICONS.png, url: aiAnalystScreenshots[3] },
       { name: 'README.md', type: 'txt', icon: FILE_ICONS.txt, content: aiDataAnalystReadme },
     ],
-    'ai-resume-analyzer': [
-      { name: 'scamshield.github', type: 'app', icon: FILE_ICONS.app },
-      { name: 'ScamShield Project.txt', type: 'txt', icon: FILE_ICONS.txt },
-      { name: 'scamshield.png', type: 'png', icon: FILE_ICONS.png },
-      { name: 'detection-logic.png', type: 'png', icon: FILE_ICONS.png },
-      { name: 'architecture.png', type: 'png', icon: FILE_ICONS.png },
-      { name: 'System Design.fig', type: 'fig', icon: FILE_ICONS.fig },
+    'phish-guard': [
+      { name: 'phishguard.app', type: 'app', icon: FILE_ICONS.app, url: 'https://phishing-detector-two-nu.vercel.app/' },
+      { name: 'PhishGuard System.txt', type: 'txt', icon: FILE_ICONS.txt },
+      { name: 'phish-guard-preview.png', type: 'png', icon: FILE_ICONS.png },
+      { name: 'README.md', type: 'txt', icon: FILE_ICONS.txt, content: phishGuardReadme },
     ],
     'food-delivery-app': [
       { name: 'portfolio-web.app', type: 'app', icon: FILE_ICONS.app },

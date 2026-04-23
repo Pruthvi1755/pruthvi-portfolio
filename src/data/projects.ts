@@ -2,7 +2,9 @@ import blogTypeScript from '@/assets/file.png'
 import blogThree from '@/assets/finder_light.png'
 import blogMotion from '@/assets/photos_light.png'
 import aiDataAnalyst1 from '@/assets/ai_data_analyst_1.png'
-import projectScamShield from '@/assets/file.png'
+import aiDataAnalyst2 from '@/assets/ai_data_analyst_2.png'
+import aiDataAnalyst3 from '@/assets/ai_data_analyst_3.png'
+import projectPhishGuard from '@/assets/phish_guard.png'
 import projectPortfolio from '@/assets/photos_light.png'
 import personal1 from '@/assets/personal_1.jpg'
 import personal2 from '@/assets/personal_2.jpg'
@@ -20,23 +22,29 @@ export interface Project {
   category: string
 }
 
+export const aiAnalystScreenshots = {
+  1: aiDataAnalyst1,
+  2: aiDataAnalyst2,
+  3: aiDataAnalyst3,
+}
+
 export const projects: Project[] = [
   {
     id: 'nike-ecommerce',
-    name: 'Automated AI Data Analyst',
-    description: 'AI-powered data analysis system for automated cleaning, EDA, insight generation, ML prediction, and interactive analytics.',
+    name: 'DataMind — Autonomous AI Data Analyst',
+    description: 'Autonomous AI system for automated data cleaning, EDA, insight generation, and interactive visual analytics.',
     tech: ['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'FastAPI', 'React', 'PostgreSQL', 'Plotly', 'Ollama'],
     url: 'https://automated-ai-data-analyst-three.vercel.app/',
     image: aiDataAnalyst1,
     category: 'Work',
   },
   {
-    id: 'ai-resume-analyzer',
-    name: 'ScamShield',
-    description: 'Multilingual UPI fraud detection system for phishing SMS and malicious URLs across 12+ Indian languages.',
-    tech: ['Python', 'MuRIL', 'Transformers', 'ONNX Runtime', 'FastAPI', 'JavaScript', 'MLflow', 'Twilio'],
-    url: 'https://github.com/Pruthvi1755',
-    image: projectScamShield,
+    id: 'phish-guard',
+    name: '⚡ PhishGuard — AI Phishing Detection System',
+    description: 'ML-powered URL threat assessment. 90.76% accuracy on 2,488-URL dataset · GradientBoosting · FastAPI · React',
+    tech: ['Python', 'GradientBoosting', 'FastAPI', 'React', 'Scikit-learn', 'Vite', 'Axios'],
+    url: 'https://phishing-detector-two-nu.vercel.app/',
+    image: projectPhishGuard,
     category: 'Work',
   },
   {

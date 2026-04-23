@@ -1,4 +1,5 @@
-﻿import { motion } from 'framer-motion'
+import { useLayoutEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
 import { useWindowStore, type AppType } from '../store/useWindowStore'
 import { useThemeStore } from '../store/useThemeStore'
 import finderDark from '@/assets/finder_dark.png'
@@ -32,8 +33,19 @@ const DOCK_ITEMS: DockItem[] = [
 ]
 
 function DockIcon({ item, isOpen }: { item: DockItem; isOpen: boolean }) {
-  const { openWindow } = useWindowStore()
+  const { openWindow, setIconPosition } = useWindowStore()
   const theme = useThemeStore(s => s.resolvedTheme)
+  const ref = useRef<HTMLButtonElement>(null)
+
+  useLayoutEffect(() => {
+    if (ref.current && item.id !== 'trash') {
+      const rect = ref.current.getBoundingClientRect()
+      setIconPosition(item.id as AppType, {
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2
+      })
+    }
+  }, [setIconPosition, item.id])
 
   const handleClick = () => {
     if (item.disabled) return
@@ -43,6 +55,7 @@ function DockIcon({ item, isOpen }: { item: DockItem; isOpen: boolean }) {
   return (
     <div className="flex flex-col items-center relative">
       <motion.button
+        ref={ref}
         onClick={handleClick}
         whileHover={{ scale: 1.5, y: -10 }}
         whileTap={{ scale: 0.9, y: -2 }}
