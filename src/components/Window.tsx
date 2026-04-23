@@ -1,5 +1,5 @@
 import { useRef, useCallback, useMemo, type ReactNode } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useWindowStore, type WindowState } from '../store/useWindowStore'
 import { useDraggableWindow } from '../hooks/useDraggableWindow'
 import { clamp } from '../utils/helpers'
